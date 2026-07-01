@@ -139,10 +139,10 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
 }
 
-.tag--advent, .tag--lent { background: var(--liturgical-purple-bg); color: var(--liturgical-purple); }
-.tag--christmas, .tag--easter, .tag--solemnity { background: var(--liturgical-gold-bg); color: var(--liturgical-gold); }
-.tag--ordinary { background: var(--liturgical-green-bg); color: var(--liturgical-green); }
-.tag--holyweek, .tag--pentecost { background: var(--liturgical-red-bg); color: var(--liturgical-red); }
+.tag--advent, .tag--lent { background: var(--liturgical-purple); color: #FFFFFF; }
+.tag--christmas, .tag--easter, .tag--solemnity { background: var(--liturgical-gold); color: #3D2C0A; }
+.tag--ordinary { background: var(--liturgical-green); color: #FFFFFF; }
+.tag--holyweek, .tag--pentecost { background: var(--liturgical-red); color: #FFFFFF; }
 
 /* Cards */
 .card {

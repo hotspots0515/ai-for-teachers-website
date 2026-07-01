@@ -31,7 +31,14 @@ const collectionsLinks = [
           <li><a href={link.href}>{link.label}</a></li>
         ))}
         <li class="has-dropdown">
-          <a href="/collections/">Collections</a>
+          <span class="dropdown-trigger">
+            <a href="/collections/">Collections</a>
+            <button type="button" class="dropdown-toggle" aria-expanded="false" aria-label="Toggle Collections menu">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </span>
           <ul class="dropdown">
             {collectionsLinks.map((link) => (
               <li><a href={link.href}>{link.label}</a></li>
@@ -43,6 +50,37 @@ const collectionsLinks = [
     </nav>
   </div>
 </header>
+
+<script>
+  document.querySelectorAll<HTMLLIElement>('.has-dropdown').forEach((item) => {
+    const toggle = item.querySelector<HTMLButtonElement>('.dropdown-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = item.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll<HTMLLIElement>('.has-dropdown.is-open').forEach((item) => {
+      if (!item.contains(e.target as Node)) {
+        item.classList.remove('is-open');
+        item.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll<HTMLLIElement>('.has-dropdown.is-open').forEach((item) => {
+        item.classList.remove('is-open');
+        item.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+</script>
 
 <style>
   .site-header {
@@ -113,6 +151,27 @@ const collectionsLinks = [
   .site-nav a:hover { color: var(--color-burgundy); }
 
   .has-dropdown { position: relative; }
+
+  .dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .dropdown-toggle {
+    background: none;
+    border: none;
+    padding: 0.2rem;
+    margin: 0;
+    cursor: pointer;
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.15s ease;
+  }
+  .dropdown-toggle:hover { color: var(--color-burgundy); }
+  .has-dropdown.is-open .dropdown-toggle { transform: rotate(180deg); }
+
   .dropdown {
     display: none;
     position: absolute;
@@ -128,7 +187,8 @@ const collectionsLinks = [
     gap: 0;
   }
   .has-dropdown:hover .dropdown,
-  .has-dropdown:focus-within .dropdown {
+  .has-dropdown:focus-within .dropdown,
+  .has-dropdown.is-open .dropdown {
     display: flex;
   }
   .dropdown li { padding: 0; }
@@ -173,6 +233,8 @@ const collectionsLinks = [
       box-shadow: none;
       padding-left: 1rem;
     }
+
+    .dropdown-toggle { display: none; }
 
     .nav-toggle:checked ~ .site-nav {
       display: flex;
