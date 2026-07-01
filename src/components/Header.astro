@@ -133,7 +133,7 @@ const collectionsLinks = [
     gap: 1.5rem;
   }
 
-  .site-nav ul {
+  .site-nav > ul {
     list-style: none;
     display: flex;
     gap: 1.4rem;
@@ -186,8 +186,6 @@ const collectionsLinks = [
     flex-direction: column;
     gap: 0;
   }
-  .has-dropdown:hover .dropdown,
-  .has-dropdown:focus-within .dropdown,
   .has-dropdown.is-open .dropdown {
     display: flex;
   }
@@ -199,9 +197,17 @@ const collectionsLinks = [
   }
   .dropdown a:hover { background: var(--color-cream); }
 
-  .btn--nav {
+  .site-nav a.btn--nav {
     padding: 0.55rem 1.2rem;
     font-size: 0.95rem;
+    background: var(--liturgical-green);
+    color: #FFFFFF;
+    font-weight: 600;
+    border-color: var(--liturgical-green);
+  }
+  .site-nav a.btn--nav:hover {
+    background: #3A5F42;
+    color: #FFFFFF;
   }
 
   @media (max-width: 860px) {
