@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// To edit a Sacrament's description, change the blurb text below.
+const sacraments = [
+  { name: 'Baptism', blurb: '[PLACEHOLDER] The first Sacrament of Initiation, welcoming a person into the Church.' },
+  { name: 'Confirmation', blurb: '[PLACEHOLDER] Strengthens the gifts of the Holy Spirit received at Baptism.' },
+  { name: 'Eucharist', blurb: '[PLACEHOLDER] The center of Catholic worship; First Communion is often a major school milestone.' },
+  { name: 'Reconciliation', blurb: '[PLACEHOLDER] The Sacrament of healing and forgiveness.' },
+  { name: 'Anointing of the Sick', blurb: '[PLACEHOLDER] Comfort and healing grace for those who are ill.' },
+  { name: 'Holy Orders', blurb: '[PLACEHOLDER] Ordination of bishops, priests, and deacons.' },
+  { name: 'Matrimony', blurb: '[PLACEHOLDER] The Sacrament of marriage between a man and a woman.' },
+];
+---
+
+<BaseLayout
+  title="Sacraments — Collections — AI for Teachers"
+  description="The seven Sacraments of the Catholic Church, explained simply for classroom use."
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <a href="/collections/" class="back-link">&larr; Back to Collections</a>
+      <h1>Sacraments</h1>
+      <div class="divider"></div>
+      <p class="muted">The seven Sacraments, explained simply for classroom reference.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--2">
+        {sacraments.map((s) => (
+          <div class="card">
+            <h3>{s.name}</h3>
+            <p class="muted">{s.blurb}</p>
+          </div>
+        ))}
+      </div>
+      <p class="placeholder-note">Placeholder descriptions &mdash; replace with your own classroom-friendly explanations.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 640px; }
+  .back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; text-decoration: none; }
+</style>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// To add a Saint, copy one of the objects below and edit it.
+const saints = [
+  {
+    name: 'St. Francis of Assisi',
+    feastDay: 'October 4',
+    blurb: '[PLACEHOLDER] Patron of animals and ecology; known for simplicity and love of creation.',
+  },
+  {
+    name: 'St. Therese of Lisieux',
+    feastDay: 'October 1',
+    blurb: '[PLACEHOLDER] Known for her "Little Way" of doing small things with great love.',
+  },
+  {
+    name: 'St. Nicholas',
+    feastDay: 'December 6',
+    blurb: '[PLACEHOLDER] Patron of children; popular classroom feast day, especially in Advent.',
+  },
+];
+---
+
+<BaseLayout
+  title="Saints — Collections — AI for Teachers"
+  description="Saints and feast days for the Catholic classroom, organized for quick reference."
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <a href="/collections/" class="back-link">&larr; Back to Collections</a>
+      <h1>Saints</h1>
+      <div class="divider"></div>
+      <p class="muted">
+        Short profiles of the Saints and their feast days, for quick classroom
+        reference.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--3">
+        {saints.map((s) => (
+          <div class="card">
+            <span class="tag tag--solemnity">{s.feastDay}</span>
+            <h3>{s.name}</h3>
+            <p class="muted">{s.blurb}</p>
+          </div>
+        ))}
+      </div>
+      <p class="placeholder-note">Placeholder Saints &mdash; add, edit, or remove entries as needed.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 640px; }
+  .back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; text-decoration: none; }
+</style>

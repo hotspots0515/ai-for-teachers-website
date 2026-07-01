@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EmailSignup from '../../components/EmailSignup.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('newsletter')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const seasonTagClass: Record<string, string> = {
+  Advent: 'tag--advent',
+  Lent: 'tag--advent',
+  Christmas: 'tag--solemnity',
+  Easter: 'tag--solemnity',
+  'Ordinary Time': 'tag--ordinary',
+};
+
+const seasons = ['All', 'Advent', 'Christmas', 'Lent', 'Easter', 'Ordinary Time'];
+---
+
+<BaseLayout
+  title="Newsletter — AI for Teachers"
+  description="Weekly newsletter archive with practical AI tips for Catholic school teachers, organized by liturgical season."
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <h1>The Weekly Newsletter</h1>
+      <div class="divider"></div>
+      <p class="muted">
+        One practical AI prompt or template a week, sometimes tied to where we
+        are in the liturgical year.
+      </p>
+      <EmailSignup
+        heading="Get It in Your Inbox"
+        subheading="Join the list to get each new post by email."
+        buttonLabel="Subscribe"
+      />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="filter-bar" role="group" aria-label="Filter by liturgical season">
+        {seasons.map((s) => (
+          <button class="filter-btn" data-season={s}>{s}</button>
+        ))}
+      </div>
+
+      <ul class="post-list">
+        {allPosts.map((post) => (
+          <li class="post-item" data-post-season={post.data.season ?? 'All'}>
+            <a href={`/newsletter/${post.slug}/`} class="post-link">
+              <div class="post-meta">
+                {post.data.season && (
+                  <span class={`tag ${seasonTagClass[post.data.season] ?? 'tag--ordinary'}`}>{post.data.season}</span>
+                )}
+                <span class="post-date muted">
+                  {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </span>
+              </div>
+              <h3>{post.data.title}</h3>
+              <p class="muted">{post.data.excerpt}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      {allPosts.length === 0 && <p class="muted">No posts yet — check back soon.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('.post-item');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const season = btn.dataset.season;
+
+      items.forEach((item) => {
+        if (season === 'All' || item.dataset.postSeason === season) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  buttons[0]?.classList.add('is-active');
+</script>
+
+<style>
+  .container--narrow { max-width: 640px; }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .filter-btn {
+    background: var(--color-warm-white);
+    border: 1px solid var(--color-warm-gray-300);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+  .filter-btn.is-active {
+    background: var(--color-burgundy);
+    border-color: var(--color-burgundy);
+    color: var(--color-warm-white);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .post-item {
+    background: var(--color-warm-white);
+    border: 1px solid var(--color-warm-gray-300);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .post-link { text-decoration: none; color: inherit; display: block; }
+  .post-link h3 { margin: 0.5rem 0 0.4rem; color: var(--color-ink); }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .post-date { font-size: 0.85rem; }
+</style>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const collections = [
+  {
+    href: '/collections/readings/',
+    title: 'Readings for the Day',
+    blurb: 'Daily Mass readings, linked from the USCCB.',
+    tag: 'Daily',
+    tagClass: 'tag--ordinary',
+  },
+  {
+    href: '/collections/saints/',
+    title: 'Saints',
+    blurb: 'Feast days and short profiles of the Saints, organized for classroom use.',
+    tag: 'Saints',
+    tagClass: 'tag--solemnity',
+  },
+  {
+    href: '/collections/liturgical-calendar/',
+    title: 'Liturgical Calendar',
+    blurb: 'A simple view of the liturgical year and its seasons.',
+    tag: 'Calendar',
+    tagClass: 'tag--advent',
+  },
+  {
+    href: '/collections/sacraments/',
+    title: 'Sacraments',
+    blurb: 'The seven Sacraments, with classroom-friendly explanations.',
+    tag: 'Sacraments',
+    tagClass: 'tag--holyweek',
+  },
+];
+---
+
+<BaseLayout
+  title="Collections — AI for Teachers"
+  description="Catholic classroom collections: daily readings, Saints, the liturgical calendar, and the Sacraments."
+>
+  <section class="section">
+    <div class="container">
+      <h1>Collections</h1>
+      <div class="divider"></div>
+      <p class="muted" style="max-width: 60ch;">
+        Reference resources for the Catholic classroom and school year, organized
+        for quick use.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--2">
+        {collections.map((c) => (
+          <a href={c.href} class="card collection-card">
+            <span class={`tag ${c.tagClass}`}>{c.tag}</span>
+            <h3>{c.title}</h3>
+            <p class="muted">{c.blurb}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .collection-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.15s ease;
+  }
+  .collection-card:hover { transform: translateY(-2px); }
+  .collection-card .tag { margin-bottom: 0.6rem; }
+  .collection-card h3 { color: var(--color-ink); }
+</style>

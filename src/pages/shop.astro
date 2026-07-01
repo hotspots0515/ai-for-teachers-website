@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+// To add a new product, copy one of the objects below and edit it.
+// buyLink: replace "#" with your real Gumroad product link when ready.
+const products = [
+  {
+    title: 'The AI Prompt & Template Pack',
+    description: 'A starter collection of ready-to-use AI prompts for lesson plans, report card comments, and parent emails.',
+    price: '$8',
+    buyLink: '#',
+    tag: 'Best Seller',
+    tagClass: 'tag--solemnity',
+  },
+  {
+    title: 'Advent Pack',
+    description: 'Advent-themed lesson ideas, classroom prayer prompts, and countdown activities.',
+    price: '$8',
+    buyLink: '#',
+    tag: 'Advent',
+    tagClass: 'tag--advent',
+  },
+  {
+    title: 'Lenten Pack',
+    description: 'Lent and Easter classroom resources, reflection prompts, and Stations of the Cross helpers.',
+    price: '$8',
+    buyLink: '#',
+    tag: 'Lent',
+    tagClass: 'tag--advent',
+  },
+  {
+    title: 'First Communion Prep Pack',
+    description: 'Templates and prompts to support First Communion preparation in the classroom.',
+    price: '$8',
+    buyLink: '#',
+    tag: 'Sacraments',
+    tagClass: 'tag--ordinary',
+  },
+  {
+    title: 'Saints & Feast Days Pack',
+    description: 'Quick, ready-to-use activities and prompts tied to the Saints and feast days throughout the year.',
+    price: '$8',
+    buyLink: '#',
+    tag: 'Feast Days',
+    tagClass: 'tag--solemnity',
+  },
+];
+---
+
+<BaseLayout
+  title="Shop — Catholic School AI Tools & Templates"
+  description="Digital prompt and template packs for Catholic school teachers — liturgical-season resources, sacrament prep, and classroom AI tools."
+>
+  <section class="section">
+    <div class="container">
+      <h1>Shop</h1>
+      <div class="divider"></div>
+      <p class="muted" style="max-width: 60ch;">
+        Digital prompt and template packs built for Catholic classrooms and
+        school offices. New packs are added throughout the liturgical year.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--3">
+        {products.map((p) => (
+          <ProductCard
+            title={p.title}
+            description={p.description}
+            price={p.price}
+            buyLink={p.buyLink}
+            tag={p.tag}
+            tagClass={p.tagClass}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

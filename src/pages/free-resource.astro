@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+---
+
+<BaseLayout
+  title="Free AI Prompt Starter Pack for Catholic School Teachers"
+  description="Download the free AI Prompt Starter Pack for Catholic school teachers — practical prompts for lesson planning, report cards, and parent emails."
+>
+  <section class="section">
+    <div class="container container--narrow text-center">
+      <h1>The Free AI Prompt Starter Pack for Catholic School Teachers</h1>
+      <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
+      <p class="lead">
+        A set of practical, ready-to-use AI prompts to help with lesson
+        planning, report card comments, and parent emails &mdash; written
+        with Catholic classrooms in mind.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2>What&rsquo;s Inside</h2>
+      <ul class="feature-list">
+        <li>Lesson planning prompts you can adapt to any grade level</li>
+        <li>Report card comment starters that still sound like you</li>
+        <li>Parent email templates for common classroom situations</li>
+        <li>A few prompts tied to the liturgical season to get you started</li>
+      </ul>
+      <p class="placeholder-note">
+        Placeholder description &mdash; update with the real contents of your
+        download once it&rsquo;s finalized.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <EmailSignup
+        heading="Get Instant Access"
+        subheading="Enter your email and the free pack will be on its way."
+        buttonLabel="Send Me the Free Pack"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 640px; }
+  .lead { font-size: 1.15rem; color: var(--color-warm-gray-700); }
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-left: 1.2rem;
+  }
+</style>

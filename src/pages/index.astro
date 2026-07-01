@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const seasons = [
+  {
+    title: 'Advent Resources',
+    blurb: 'Classroom prayer, countdown activities, and lesson ideas for the season of waiting.',
+    tag: 'Advent',
+    tagClass: 'tag--advent',
+  },
+  {
+    title: 'Lent & Easter Prep',
+    blurb: 'Reflection prompts, Stations of the Cross helpers, and Easter classroom resources.',
+    tag: 'Lent / Easter',
+    tagClass: 'tag--easter',
+  },
+  {
+    title: 'Feast Day Activities',
+    blurb: 'Quick, ready-to-use activities tied to upcoming saints’ feast days.',
+    tag: 'Feast Days',
+    tagClass: 'tag--solemnity',
+  },
+];
+---
+
+<BaseLayout
+  title="AI for Teachers — Practical AI Help for Catholic School Teachers"
+  description="Practical AI tools and templates for Catholic elementary school teachers and administrators — lesson planning, report cards, parent emails, and liturgical-season classroom content."
+>
+  <!-- Hero -->
+  <section class="section hero">
+    <div class="container hero__inner">
+      <h1>Practical AI Help for Catholic School Teachers &amp; Administrators</h1>
+      <p class="hero__subhead">
+        Save hours on lesson planning, report card comments, and parent emails &mdash;
+        with AI tools built specifically for the rhythm of the Catholic liturgical
+        calendar, sacraments, and feast days.
+      </p>
+      <div class="hero__actions">
+        <a href="#email-capture" class="btn btn--primary">Get the Free Prompt Pack</a>
+        <a href="/shop/" class="btn btn--secondary">Browse the Shop</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility -->
+  <section class="section section--alt section--tight">
+    <div class="container credibility">
+      <div class="divider"></div>
+      <p class="credibility__text">
+        Written by a former classroom teacher, now a Catholic elementary school
+        administrator &mdash; building the practical AI resources I wish I&rsquo;d
+        had in both roles.
+      </p>
+    </div>
+  </section>
+
+  <!-- Email capture -->
+  <section class="section" id="email-capture">
+    <div class="container container--narrow">
+      <EmailSignup />
+    </div>
+  </section>
+
+  <!-- Product section -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Ready-to-Use Resources</h2>
+      <div class="divider"></div>
+      <p class="muted" style="max-width: 60ch;">
+        Digital prompt and template packs you can use in your classroom or office
+        today &mdash; no AI experience required.
+      </p>
+      <div class="grid grid--2" style="margin-top: 2rem;">
+        <ProductCard
+          title="The AI Prompt &amp; Template Pack"
+          description="A starter collection of ready-to-use AI prompts for lesson plans, report card comments, and parent emails."
+          price="$8"
+          buyLink="#"
+          tag="Best Seller"
+          tagClass="tag--solemnity"
+        />
+        <div class="card more-products">
+          <h3>More Packs Coming</h3>
+          <p class="muted">Liturgical-season packs, Saints &amp; Feast Days, and First Communion prep are on the way.</p>
+          <a href="/shop/" class="btn btn--secondary">See the Full Shop</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Coming Up: liturgical teaser strip -->
+  <section class="section">
+    <div class="container">
+      <h2>What&rsquo;s Coming Up</h2>
+      <div class="divider"></div>
+      <div class="grid grid--3">
+        {seasons.map((s) => (
+          <div class="card season-card">
+            <span class={`tag ${s.tagClass}`}>{s.tag}</span>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.blurb}</p>
+            <p class="placeholder-note">Placeholder content &mdash; update each season.</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Social links -->
+  <section class="section section--alt section--tight">
+    <div class="container text-center">
+      <h3>Follow Along</h3>
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@PLACEHOLDER" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a href="https://www.instagram.com/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.facebook.com/PLACEHOLDER" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.youtube.com/@PLACEHOLDER" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
+      <p class="placeholder-note">Placeholder URLs &mdash; replace with your real social profiles.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+    text-align: center;
+  }
+  .hero__inner { max-width: 760px; margin: 0 auto; }
+  .hero__subhead {
+    font-size: 1.15rem;
+    color: var(--color-warm-gray-700);
+    margin-bottom: 2rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .credibility { max-width: 640px; margin: 0 auto; text-align: center; }
+  .credibility .divider { margin-left: auto; margin-right: auto; }
+  .credibility__text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-ink);
+  }
+
+  .container--narrow { max-width: 640px; }
+
+  .more-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    background: var(--color-cream);
+    border-style: dashed;
+  }
+
+  .season-card .tag { margin-bottom: 0.5rem; }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 1rem 0 0.5rem;
+    flex-wrap: wrap;
+  }
+  .social-links a { font-weight: 600; }
+</style>

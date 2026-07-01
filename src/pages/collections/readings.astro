@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Readings for the Day — Collections — AI for Teachers"
+  description="Daily Mass readings for the Catholic classroom, linked from the USCCB."
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <a href="/collections/" class="back-link">&larr; Back to Collections</a>
+      <h1>Readings for the Day</h1>
+      <div class="divider"></div>
+
+      <p>
+        Daily Mass readings are published by the USCCB (United States
+        Conference of Catholic Bishops) and updated every day. Rather than
+        reproduce the text here, this page links directly to the official
+        source so the readings are always accurate and current.
+      </p>
+
+      <div class="card reading-cta">
+        <h3>Today&rsquo;s Readings</h3>
+        <p class="muted">View the official daily readings on the USCCB website.</p>
+        <a
+          href="https://bible.usccb.org/daily-bible-reading"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--primary"
+        >
+          View Today&rsquo;s Readings (USCCB)
+        </a>
+      </div>
+
+      <p class="placeholder-note">
+        This page links out to USCCB.org rather than copying readings text, to
+        respect copyright and stay accurate day to day. See the update guide
+        for how to optionally embed a daily readings widget instead.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 640px; }
+  .back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; text-decoration: none; }
+  .reading-cta { margin-top: 1.5rem; text-align: center; }
+  .reading-cta h3 { margin-bottom: 0.3rem; }
+</style>

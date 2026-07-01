@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// To edit a season, change the text below. tagClass controls the accent color.
+const seasons = [
+  { name: 'Advent', tagClass: 'tag--advent', blurb: '[PLACEHOLDER] A season of preparation and hopeful waiting before Christmas.' },
+  { name: 'Christmas', tagClass: 'tag--solemnity', blurb: '[PLACEHOLDER] Celebrating the birth of Christ, through the Baptism of the Lord.' },
+  { name: 'Ordinary Time (Winter/Spring)', tagClass: 'tag--ordinary', blurb: '[PLACEHOLDER] Growth in discipleship between Christmas and Lent.' },
+  { name: 'Lent', tagClass: 'tag--advent', blurb: '[PLACEHOLDER] Forty days of prayer, fasting, and almsgiving before Easter.' },
+  { name: 'Holy Week & Easter Triduum', tagClass: 'tag--holyweek', blurb: '[PLACEHOLDER] From Palm Sunday through the Easter Vigil.' },
+  { name: 'Easter', tagClass: 'tag--solemnity', blurb: '[PLACEHOLDER] Fifty days of celebrating the Resurrection, through Pentecost.' },
+  { name: 'Ordinary Time (Summer/Fall)', tagClass: 'tag--ordinary', blurb: '[PLACEHOLDER] The longest season, focused on the life and teaching of Christ.' },
+];
+---
+
+<BaseLayout
+  title="Liturgical Calendar — Collections — AI for Teachers"
+  description="A simple overview of the Catholic liturgical year and its seasons, for classroom planning."
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <a href="/collections/" class="back-link">&larr; Back to Collections</a>
+      <h1>Liturgical Calendar</h1>
+      <div class="divider"></div>
+      <p class="muted">A simple overview of the liturgical year, season by season.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <ol class="season-list">
+        {seasons.map((s) => (
+          <li class="card season-item">
+            <span class={`tag ${s.tagClass}`}>{s.name}</span>
+            <p class="muted">{s.blurb}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="placeholder-note">
+        Placeholder dates/descriptions &mdash; for exact current-year dates, link
+        to or cross-check the USCCB calendar.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 640px; }
+  .back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.9rem; text-decoration: none; }
+  .season-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .season-item .tag { margin-bottom: 0.5rem; }
+</style>

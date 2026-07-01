@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('newsletter');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const seasonTagClass: Record<string, string> = {
+  Advent: 'tag--advent',
+  Lent: 'tag--advent',
+  Christmas: 'tag--solemnity',
+  Easter: 'tag--solemnity',
+  'Ordinary Time': 'tag--ordinary',
+};
+---
+
+<BaseLayout title={post.data.title} description={post.data.excerpt}>
+  <article class="section">
+    <div class="container container--narrow">
+      <a href="/newsletter/" class="back-link">&larr; Back to Newsletter</a>
+
+      <div class="post-meta">
+        {post.data.season && (
+          <span class={`tag ${seasonTagClass[post.data.season] ?? 'tag--ordinary'}`}>{post.data.season}</span>
+        )}
+        <span class="post-date muted">
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+      </div>
+
+      <h1>{post.data.title}</h1>
+      <div class="divider"></div>
+
+      <div class="post-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .container--narrow { max-width: 680px; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-date { font-size: 0.85rem; }
+  .post-body :global(p) { margin-bottom: 1.1em; }
+  .post-body :global(a) { text-decoration: underline; }
+</style>

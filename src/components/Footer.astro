@@ -1,0 +1,97 @@
+---
+// Update these with real URLs whenever your accounts are ready.
+const socialLinks = [
+  { label: 'TikTok', href: 'https://www.tiktok.com/@PLACEHOLDER' },
+  { label: 'Instagram', href: 'https://www.instagram.com/PLACEHOLDER' },
+  { label: 'Facebook', href: 'https://www.facebook.com/PLACEHOLDER' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@PLACEHOLDER' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="brand-footer">AI for Teachers</p>
+      <p class="muted">Practical AI help for Catholic school teachers and administrators.</p>
+    </div>
+
+    <div>
+      <h3 class="footer-heading">Explore</h3>
+      <ul class="footer-list">
+        <li><a href="/about/">About</a></li>
+        <li><a href="/shop/">Shop</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/collections/">Collections</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="footer-heading">Follow Along</h3>
+      <ul class="footer-list">
+        {socialLinks.map((link) => (
+          <li><a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a></li>
+        ))}
+      </ul>
+      <p class="placeholder-note">Placeholder links — replace with real social URLs.</p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="muted">&copy; {new Date().getFullYear()} AI for Teachers. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-navy);
+    color: var(--color-warm-gray-100);
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .site-footer a { color: var(--color-warm-gray-100); }
+  .site-footer a:hover { color: var(--liturgical-gold); }
+  .site-footer .muted { color: var(--color-warm-gray-300); }
+
+  .brand-footer {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--color-warm-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid { grid-template-columns: 1.3fr 1fr 1fr; }
+  }
+
+  .footer-heading {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-warm-white);
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  price: string;
+  buyLink: string;
+  tag?: string;
+  tagClass?: string;
+}
+
+const { title, description, price, buyLink, tag, tagClass = 'tag--ordinary' } = Astro.props;
+---
+
+<div class="product-card card">
+  {tag && <span class={`tag ${tagClass}`}>{tag}</span>}
+  <h3>{title}</h3>
+  <p class="muted">{description}</p>
+  <p class="price">{price}</p>
+  <a href={buyLink} class="btn btn--primary btn--block" target="_blank" rel="noopener noreferrer">Buy Now</a>
+  <p class="placeholder-note">Placeholder price &amp; checkout link.</p>
+</div>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .product-card .tag { align-self: flex-start; margin-bottom: 0.5rem; }
+  .price {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-burgundy);
+    margin: 0.25rem 0 0.75rem;
+  }
+</style>
