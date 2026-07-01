@@ -1,7 +1,34 @@
-# AI for Teachers — Update Guide
+# AI for Teachers — Website Manual
 
-This is your step-by-step reference for running, editing, and publishing
-your website. No coding experience required — just follow the steps.
+Your complete, step-by-step reference for running, editing, and publishing
+your website. No coding experience required — just follow the steps in
+order for whatever you're trying to do.
+
+**Live site:** deployed on Netlify, connected to GitHub repo
+`hotspots0515/ai-for-teachers-website`. Every time you save a change and
+push it to GitHub, Netlify automatically rebuilds and publishes the site
+within a minute or two.
+
+---
+
+## Table of contents
+
+1. Running the site on your computer
+2. How the site is organized
+3. Editing the Home page
+4. Editing the About page
+5. Editing the Free Resource page
+6. Adding or editing Shop products
+7. Adding a new weekly Newsletter post
+8. Editing Collections (Readings, Saints, Liturgical Calendar, Sacraments)
+9. Adding your logo or banner image
+10. Updating the "Follow Along" social media links
+11. Connecting the email signup form to Brevo
+12. Connecting "Buy Now" buttons to Gumroad
+13. Changing colors or fonts
+14. Basic SEO (page titles & descriptions)
+15. Publishing changes (saving to GitHub → Netlify)
+16. Troubleshooting
 
 ---
 
@@ -9,7 +36,7 @@ your website. No coding experience required — just follow the steps.
 
 Every time you want to preview changes before they go live:
 
-1. Open a terminal in this folder (`ai-for-teachers-website`).
+1. Open a terminal in the `ai-for-teachers-website` folder.
 2. The first time only, run: `npm install`
 3. Run: `npm run dev`
 4. Open the link it shows you (usually `http://localhost:4321`) in your browser.
@@ -19,7 +46,7 @@ Every time you want to preview changes before they go live:
 
 ---
 
-## 2. Where everything lives
+## 2. How the site is organized
 
 | What you want to edit | File to open |
 |---|---|
@@ -35,17 +62,106 @@ Every time you want to preview changes before they go live:
 | Liturgical Calendar | `src/pages/collections/liturgical-calendar.astro` |
 | Sacraments | `src/pages/collections/sacraments.astro` |
 | Site colors / fonts | `src/styles/global.css` |
-| Header navigation & Subscribe button | `src/components/Header.astro` |
+| Header, navigation, Subscribe button, logo | `src/components/Header.astro` |
 | Footer & social links | `src/components/Footer.astro` |
+| Site icon shown in browser tabs | `public/favicon.svg` |
 
 You don't need to understand all the code in these files — just find the
 plain English text inside quotes (`"like this"`) and edit it. Anything
 wrapped in `[PLACEHOLDER ...]` or marked with a "Placeholder" note is
-meant to be replaced.
+meant to be replaced with your real content.
+
+**About the "3 lines" icon next to the logo:** that's the mobile menu
+button (a "hamburger" icon). It only appears on narrower screens (phones,
+tablets, or a narrowed browser window). Tapping it opens the full
+navigation menu, including the Collections list, stacked vertically. On
+wider screens it disappears automatically because the full menu already
+fits in the header. You don't need to do anything to maintain this — it's
+fully automatic.
 
 ---
 
-## 3. Adding a new weekly newsletter post
+## 3. Editing the Home page
+
+Open `src/pages/index.astro`.
+
+- **Headline & subheading:** near the top, inside the `<h1>` and the
+  paragraph right after it.
+- **Credibility sentence:** search for "Written by a former classroom
+  teacher" and edit that sentence.
+- **Featured product:** look for the `<ProductCard ... />` block and edit
+  the `title`, `description`, `price`, and `buyLink` values.
+- **"What's Coming Up" liturgical teaser strip:** near the bottom, find
+  the `seasons` list at the top of the file:
+  ```
+  {
+    title: 'Advent Resources',
+    blurb: 'Classroom prayer, countdown activities...',
+    tag: 'Advent',
+    tagClass: 'tag--advent',
+  },
+  ```
+  Edit the `title` and `blurb` text for each season as the year
+  progresses. `tagClass` options: `tag--advent` (purple), `tag--solemnity`
+  (gold), `tag--ordinary` (green), `tag--holyweek` (red).
+- **Social links at the bottom:** edit the four URLs in the "Follow
+  Along" section (see Section 10 for the full walkthrough).
+
+---
+
+## 4. Editing the About page
+
+Open `src/pages/about.astro`. Replace the paragraph marked
+`[PLACEHOLDER: Replace this paragraph...]` and the two paragraphs below
+it with your real story. Delete the `placeholder-note` paragraph at the
+bottom once you're happy with your bio.
+
+---
+
+## 5. Editing the Free Resource page
+
+Open `src/pages/free-resource.astro`.
+
+- Edit the headline and description near the top.
+- Edit the bullet list under "What's Inside" to match your real download.
+- The email form below it is the same reusable component used elsewhere
+  — see Section 11 to connect it to Brevo.
+
+---
+
+## 6. Adding or editing Shop products
+
+Open `src/pages/shop.astro`. Near the top you'll see a list of products:
+
+```
+{
+  title: 'Advent Pack',
+  description: 'Advent-themed lesson ideas...',
+  price: '$8',
+  buyLink: '#',
+  tag: 'Advent',
+  tagClass: 'tag--advent',
+},
+```
+
+- **Change a price:** edit the text inside `price: '...'`.
+- **Connect a real "Buy Now" button:** replace the `#` inside
+  `buyLink: '#'` with your real Gumroad product link (Section 12).
+- **Add a brand-new product:** copy one whole `{ ... }` block, paste it
+  right after another one, and edit the text inside.
+- `tagClass` options: `tag--advent` (purple), `tag--solemnity` (gold),
+  `tag--ordinary` (green), `tag--holyweek` (red).
+
+The Home page also features one product near the top — update that one
+separately in `src/pages/index.astro` (look for `ProductCard`).
+
+> **Reminder:** every product currently uses the $8 placeholder price.
+> Update each one in both `shop.astro` and `index.astro` when you're
+> ready to set real prices.
+
+---
+
+## 7. Adding a new weekly Newsletter post
 
 This is the one you'll do most often, and it's the easiest.
 
@@ -63,48 +179,17 @@ This is the one you'll do most often, and it's the easiest.
    ---
    ```
    - `season` must be one of: `Advent`, `Christmas`, `Lent`, `Easter`,
-     `Ordinary Time` (or you can delete the `season:` line entirely if a
-     post isn't tied to a season).
+     `Ordinary Time` — or delete the `season:` line entirely if a post
+     isn't tied to a season.
 4. Below the second `---`, write your post in plain text. Leave a blank
    line between paragraphs.
 5. Save the file. It will automatically appear on `/newsletter/`, newest
-   first, filterable by season.
+   first, filterable by season, with its own page at
+   `/newsletter/your-filename/`.
 
 ---
 
-## 4. Updating the Shop (products & prices)
-
-1. Open `src/pages/shop.astro`.
-2. Near the top, you'll see a list of products that looks like this:
-   ```
-   {
-     title: 'Advent Pack',
-     description: 'Advent-themed lesson ideas...',
-     price: '$8',
-     buyLink: '#',
-     tag: 'Advent',
-     tagClass: 'tag--advent',
-   },
-   ```
-3. To change a price: edit the text inside `price: '...'`.
-4. To connect a real "Buy Now" button: replace the `#` inside
-   `buyLink: '#'` with your real Gumroad product link (see Section 6).
-5. To add a brand-new product: copy one whole `{ ... }` block, paste it
-   right after another one, and edit the text inside.
-6. `tagClass` controls the little colored label — options are:
-   `tag--advent` (purple), `tag--solemnity` (gold), `tag--ordinary`
-   (green), `tag--holyweek` (red).
-
-The Home page also features one product near the top — update that one
-separately in `src/pages/index.astro` (look for `ProductCard`).
-
-> **Reminder you asked for:** the $8 placeholder price is used everywhere
-> for now. When you're ready to set real prices, repeat the price edit
-> above for every product in `shop.astro` and in `index.astro`.
-
----
-
-## 5. Updating Collections (Saints, Sacraments, Liturgical Calendar)
+## 8. Editing Collections (Readings, Saints, Liturgical Calendar, Sacraments)
 
 These pages work the same way as the Shop — a list of items near the top
 of the file that you edit directly:
@@ -117,8 +202,8 @@ of the file that you edit directly:
   edit the `seasons` list.
 - **Readings for the Day** (`src/pages/collections/readings.astro`):
   this page links out to the official USCCB daily readings page rather
-  than copying the text (so it's always accurate and avoids copyright
-  issues). If you'd ever like to embed a daily readings widget instead of
+  than copying the text, so it's always accurate and avoids copyright
+  issues. If you'd like to embed a daily readings widget instead of
   linking out, that's a future enhancement — just ask.
 
 To add a new entry to any of these lists, copy one `{ ... }` block and
@@ -126,14 +211,61 @@ edit the text inside, same as the Shop instructions above.
 
 ---
 
-## 6. Connecting the email signup form to Brevo
+## 9. Adding your logo or banner image
+
+Once you have your logo/banner image files saved on your computer:
+
+1. Copy the image file into the `public/` folder in this project (e.g.
+   `public/logo.png`).
+2. To show it in the header next to "AI for Teachers": open
+   `src/components/Header.astro`, find the line
+   `<a href="/" class="brand">AI for Teachers</a>`, and replace it with:
+   ```html
+   <a href="/" class="brand">
+     <img src="/logo.png" alt="AI for Teachers" style="height: 36px; vertical-align: middle; margin-right: 8px;" />
+     AI for Teachers
+   </a>
+   ```
+3. To use it as the browser tab icon (favicon): replace
+   `public/favicon.svg` with your own square icon file (rename it to
+   `favicon.svg`, `favicon.ico`, or `favicon.png` and update the `<link
+   rel="icon">` line in `src/layouts/BaseLayout.astro` to match).
+4. To use a wide banner image as the preview image when your site is
+   shared on Facebook/Instagram/TikTok: save it as e.g.
+   `public/og-banner.jpg`, then in `src/layouts/BaseLayout.astro` add
+   this line inside the `<head>` section:
+   ```html
+   <meta property="og:image" content="https://your-domain.com/og-banner.jpg" />
+   ```
+
+**Logo vs. banner — which to use where:** a square **logo** works best
+in the header (small) and as the favicon (very small, so keep it
+simple). A wide **banner** isn't used within the page layouts themselves
+in this design, but is perfect as the social-media share image (step 4
+above) and as your actual TikTok/Instagram/YouTube profile banners
+directly on those platforms. You can use both — they serve different
+spots.
+
+---
+
+## 10. Updating the "Follow Along" social media links
+
+You have two places to update — they're currently independent copies of
+the same four links:
+
+1. Open `src/components/Footer.astro`. Near the top, edit the
+   `socialLinks` list with your real URLs.
+2. Open `src/pages/index.astro` and find the "Follow Along" section near
+   the bottom — update the same four links there too (TikTok, Instagram,
+   Facebook, YouTube).
+
+---
+
+## 11. Connecting the email signup form to Brevo
 
 Right now, the email form on the Home, Free Resource, and Newsletter
 pages is a placeholder — it shows a "Thanks!" message but doesn't
 actually collect emails.
-
-When you're ready to connect it to **Brevo** (recommended — free tier,
-beginner-friendly):
 
 1. Create a free Brevo account at brevo.com.
 2. In Brevo, create a Contact List for your subscribers.
@@ -143,15 +275,15 @@ beginner-friendly):
 5. Open `src/components/EmailSignup.astro` in this project.
 6. Replace the `<form>...</form>` block with the HTML Brevo gave you.
 7. Save, then check the live preview to make sure it still looks right —
-   you can adjust the surrounding CSS in the `<style>` section at the
-   bottom of that same file if needed.
+   adjust the CSS in the `<style>` section at the bottom of the same
+   file if needed.
 
-Because all three pages use this same `EmailSignup.astro` component,
-you only have to do this once and it updates everywhere.
+Because all three pages use this same `EmailSignup.astro` component, you
+only have to do this once and it updates everywhere.
 
 ---
 
-## 7. Connecting "Buy Now" buttons to Gumroad
+## 12. Connecting "Buy Now" buttons to Gumroad
 
 1. Create a free Gumroad account at gumroad.com.
 2. Create a product (e.g. "Advent Pack") and set your real price.
@@ -159,37 +291,31 @@ you only have to do this once and it updates everywhere.
 4. Open `src/pages/shop.astro` (and `src/pages/index.astro` for the
    featured product on the Home page).
 5. Find the matching product and replace `buyLink: '#'` with your real
-   Gumroad link, e.g. `buyLink: 'https://gumroad.com/l/advent-pack'`.
+   Gumroad link.
 6. Save and check the live preview — the "Buy Now" button will now go to
    your real checkout page.
 
 ---
 
-## 8. Updating social media links
-
-1. Open `src/components/Footer.astro`.
-2. Near the top, edit the `socialLinks` list with your real URLs.
-3. Open `src/pages/index.astro` and find the "Follow Along" section near
-   the bottom — update the same four links there too (TikTok, Instagram,
-   Facebook, YouTube).
-
----
-
-## 9. Changing colors or fonts
+## 13. Changing colors or fonts
 
 All colors are defined once at the top of `src/styles/global.css` under
-`:root`. For example, to change the main accent color, edit the line:
+`:root`. For example, to change the main accent color, edit:
 ```
 --color-burgundy: #6E2C40;
 ```
 Everything using that color across the whole site updates automatically.
 The liturgical accent colors (purple, gold, green, red) are defined the
-same way just below it — adjust with care, since they're used for
-seasonal tags throughout the site.
+same way just below it, and are used as bold, solid tag colors — adjust
+with care since they carry meaning (season/category) across the site.
+
+The "Subscribe" button in the header uses the liturgical green color —
+to change just that button, edit the `.site-nav a.btn--nav` rule inside
+`src/components/Header.astro`.
 
 ---
 
-## 10. Basic SEO (already set up, here's how to adjust it)
+## 14. Basic SEO (already set up, here's how to adjust it)
 
 Every page has a `title` and `description` near the top, inside
 `<BaseLayout title="..." description="...">`. These control:
@@ -202,26 +328,40 @@ To improve SEO for a page, edit those two lines with relevant keywords
 
 ---
 
-## 11. Publishing the site (Netlify)
+## 15. Publishing changes (saving to GitHub → Netlify)
 
-**First-time setup:**
-1. Push this project to a GitHub repository (ask if you'd like help with
-   this step).
-2. Go to netlify.com and sign up for a free account.
-3. Click "Add new site" → "Import an existing project" → connect your
-   GitHub repo.
-4. Netlify will detect Astro automatically. Build command: `npm run
-   build`. Publish directory: `dist`.
-5. Click Deploy. Netlify gives you a free `*.netlify.app` URL right away,
-   and you can connect your own domain name later in Site Settings →
-   Domain Management.
+Your site auto-deploys. Every time you want your edits to go live:
 
-**Every time after that:**
-1. Make your edits locally (as described above) and confirm they look
-   right with `npm run dev`.
-2. Save your changes to GitHub (commit + push).
-3. Netlify automatically rebuilds and publishes the site within a minute
-   or two — no manual steps needed.
+1. Make your edits locally and confirm they look right with `npm run dev`.
+2. Open a terminal in the project folder and run:
+   ```
+   git add -A
+   git commit -m "describe what you changed"
+   git push
+   ```
+3. Netlify automatically detects the new commit, rebuilds, and publishes
+   the site — usually within 1–2 minutes. No manual steps needed on the
+   Netlify side.
+4. If you don't see your change live after a couple of minutes, check
+   the **Builds** tab in your Netlify dashboard for errors, and hard
+   refresh your browser (`Ctrl + Shift + R`) in case it's showing a
+   cached version.
+
+---
+
+## 16. Troubleshooting
+
+- **A change doesn't show up on the live site:** hard refresh with
+  `Ctrl + Shift + R`, and confirm the commit actually reached GitHub
+  (`git push` succeeded) and that Netlify's latest deploy succeeded
+  (check the Netlify dashboard "Builds" tab).
+- **`npm run dev` shows an error:** read the error message in the
+  terminal — it usually names the exact file and line. If you're stuck,
+  copy the error text and ask for help.
+- **Something looks visually broken after an edit:** undo your last
+  change (or compare against a working version) and re-check for a
+  missing comma, quote mark, or curly brace — these list-based sections
+  (Shop, Saints, Sacraments, etc.) are sensitive to exact formatting.
 
 ---
 
@@ -234,4 +374,5 @@ To improve SEO for a page, edit those two lines with relevant keywords
 - [ ] Replace placeholder social media URLs
 - [ ] Fill in real Saints, Sacraments, and Liturgical Calendar content
 - [ ] Write your first few real newsletter posts
-- [ ] Deploy to Netlify and connect your domain name
+- [ ] Add your logo and/or banner image
+- [ ] Point your custom domain (AIforTeachersWeekly) at Netlify
