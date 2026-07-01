@@ -18,7 +18,10 @@ const collectionsLinks = [
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="/" class="brand">AI for Teachers</a>
+    <a href="/" class="brand">
+      <img src="/logo.png" alt="" class="brand-logo" width="40" height="40" />
+      AI for Teachers
+    </a>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
     <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">
@@ -102,11 +105,22 @@ const collectionsLinks = [
   }
 
   .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1.35rem;
     color: var(--color-burgundy);
     text-decoration: none;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .nav-toggle { display: none; }
